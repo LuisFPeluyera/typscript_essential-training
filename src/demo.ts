@@ -1,5 +1,1 @@
-class Contact {
-    id;
-    name;
-    birthDate;
-}
+let x: number;
