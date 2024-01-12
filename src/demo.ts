@@ -1,22 +1,15 @@
 interface Contact {
     id: number;
-    name: ContactName;
-    birthdate?: Date;
-    status: ContactStatus;
+    name: string;
+   
 }
 
-enum ContactStatus {
-    Active = 'active', 
-    Inactive = 'inactive',
-    New = 'new'
+function clone <T>(source: T): T {
+    return Object.apply({}, source);
 }
 
-let primaryContact: Contact = {
-    birthdate: new Date("o1-01-1980"),
-    id: 12345,
-    name: 'Jamie Johnson',
-    status:ContactStatus.Active
-}
+const a: Contact = { id: 123, name: "Homer Simpson" };
+const b = clone(a)
 
-type ContactName = string;
-
+const dateRange = { startDate: Date.now(), endDate: Date.now() }
+const dateRangeCopy = clone(dateRange)
