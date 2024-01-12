@@ -1,15 +1,44 @@
+type ContactName = string;
+
+type ContactStatus = "active" | "inactive" | "new"
+
+
+type ContactBirthDate = Date | number | string;
+
 interface Contact {
     id: number;
-    name: string;
-   
+    name: ContactName;
+    birthDate?: ContactBirthDate;
+    status?: ContactStatus;
 }
 
-function clone <T>(source: T): T {
-    return Object.apply({}, source);
+interface Address {
+    line1: string;
+    line2: string;
+    province: string;
+    region: string;
+    postalCode: string;
 }
 
-const a: Contact = { id: 123, name: "Homer Simpson" };
-const b = clone(a)
+type AddressableContact = Contact & Address
 
-const dateRange = { startDate: Date.now(), endDate: Date.now() }
-const dateRangeCopy = clone(dateRange)
+function getBirthDate(contact: Contact) {
+    if (typeof contact.birthDate === "number") {
+        return new Date(contact.birthDate);
+    }
+    else if (typeof contact.birthDate === "string") {
+        return Date.parse(contact.birthDate)
+    }
+    else {
+        return contact.birthDate
+    }
+}
+
+let primaryContact: Contact = {
+    id: 12345,
+    name: "Jamie Johnson",
+    status: "active"
+}
+
+type ContactFileds = keyof Contact
+
